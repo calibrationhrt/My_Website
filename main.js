@@ -243,6 +243,9 @@ async function addItem() {
     alertWarning("ข้อมูลไม่ครบ", "กรุณากรอกให้ครบทุกช่อง");
     return;
   }
+  closeModal();
+  await new Promise(r => setTimeout(r, 100));
+  
   const ok = await confirmDialog("ต้องการเพิ่มข้อมูลใช่ไหม?");
   if (!ok) return;  
   closeModal();
