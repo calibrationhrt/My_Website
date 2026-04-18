@@ -201,6 +201,11 @@ table, th, td {
   border: 1px solid #ccc;
 }
 
+.date-row {
+  justify-content: space-between;
+  display: flex;
+}
+
 /*input page*/
 .form-group {
   display: flex;
