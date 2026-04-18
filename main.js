@@ -9,6 +9,10 @@ const firebaseConfig = {
   measurementId: "G-EK23GYH3FL"
 };
 
+// Initialize Vercel Speed Insights
+import { injectSpeedInsights } from '@vercel/speed-insights';
+injectSpeedInsights();
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";  
 import { getFirestore, collection, setDoc, onSnapshot, deleteDoc, doc, getDoc, query, where }from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { alertSuccess, alertError, alertWarning, confirmDialog } from "./alert.js";
