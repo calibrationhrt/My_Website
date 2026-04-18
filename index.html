@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Calibration Notify</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="img/png" href="Picture/Heritage-Logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wdth,wght@93.7,569&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+  </style>
+</head>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<body>
+  <div class="container">
+
+    <!-- Dashboard -->
+    <div class="all-header">
+      <div class="header-logo">
+        <img src="Picture/Heritage-Logo.png" class="logo-heritage">
+        <h2>Calibration Notify</h2>
+
+        <div class="login-logout">
+          <button id="adminLoginBtn">🔐 Admin</button>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </div> 
+
+      <div class="dashboard">
+        <div class="card total" id="cardAll">อุปกรณ์ทั้งหมด : <span id="total">0</span></div>
+        <div class="card near" id="cardNear">ใกล้ครบกำหนด : <span id="nearCount">0</span></div>
+        <div class="card overdue" id="cardOverdue">เกินกำหนด : <span id="overdueCount">0</span></div>
+      </div>
+      <div>
+      <div class="btn-add-del">
+        <button class="add-btn" id="add-btn-additem">➕ เพิ่มเครื่องมือ</button>
+        <button class="delete-btn" id="deleteSelected">🗑️ ลบที่เลือก</button>
+      </div>
+        <div class="table-card">
+            <div class="filter-bar">
+              <input type="text" id="searchInput" placeholder="🔍 ค้นหาชื่อ / รหัส">
+
+              <select id="filterDept">
+                <option value="all">ทั้งหมด</option>
+                <option value="BEVERAGE">BEVERAGE</option>
+                <option value="NUTS">NUTS</option>
+              </select>
+            </div>
+        </div>
+      </div>
+    </div>
+      <div>
+        <table class="board">
+          <thead>
+            <tr>
+              <th>ชื่อเครื่อง</th>
+              <th>รหัสเครื่อง</th>
+              <th>สอบเทียบล่าสุด</th>
+              <th>สอบเทียบครั้งถัดไป</th>
+              <th>แผนก</th>
+              <th>สถานะ</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    <!-- Form -->
+      <div id="modal" class="modal">
+          <div class="modal-content">
+            <h2>เพิ่มเครื่องมือ</h2>
+              <div class="form-group">
+                <input type="text" id="name" placeholder="กรอกชื่อเครื่อง">
+              </div>
+              <div class="form-group">
+                <input type="text" id="id_tag" placeholder="กรอกรหัสเครื่อง">
+              </div>
+              <div class="form-group">         
+                <div class="date-row">
+                  <input type="text" id="date" placeholder="เลือกวันที่สอบล่าสุด">
+                  <input type="text" id="interval" placeholder="รอบสอบเทียบ เช่น 1D 6M 1Y">
+                </div>
+              </div>
+              <div class="form-group">
+                <select id="department">
+                  <option value="">-- เลือกแผนก --</option>
+                  <option value="BEVERAGE">BEVERAGE</option>
+                  <option value="NUTS">NUTS</option>
+                </select>
+              </div>
+              <div class="choosee-xcelfile"> 
+                <input type="file" id="excelFile" accept=".xlsx,.xls">
+                <button id="importBtn">IMPORT</button>
+              </div>
+              <div class="modal-actions">
+                <button class="additem-btn" id="addItem">💾 บันทึก</button>
+                <button class="closemodel-btn" id="closeModal">❌ ยกเลิก</button>
+              </div>
+            </div>
+        </div>
+    </div> 
+
+  <div class="pagination-btn" id="pagination">
+    <button id="prevPage">⬅ Prev</button>
+    <span id="pageInfo"></span>
+    <button id="nextPage">Next ➡</button>
+  </div>
+
+  <script type="module" src="main.js"></script>
+  <script type="module" src="alert.js"></script>
+
+  <div id="detailModal" class="modal">
+    <div class="modal-content">
+      <h2>รายละเอียดอุปกรณ์</h2>
+      
+      <div id="detailContent"></div>
+
+      <button class="closedetail-btn" id="closeDetailBtn">❌ ปิด</button>
+    </div>
+  </div>
+</body>
+</html>
