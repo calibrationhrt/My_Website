@@ -49,11 +49,24 @@ import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPe
       const email = formValues.username + "@gmail.com";
       const password = formValues.password;
 
+      Swal.fire({
+        title: "กำลังเข้าสู่ระบบ...",
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading()
+      });
+
     try {
       await setPersistence(auth, browserSessionPersistence);
       await signInWithEmailAndPassword(auth, email, password);
       sessionStorage.setItem("loginTime", Date.now().toString());
-      Swal.fire("สำเร็จ", "เข้าสู่ระบบแล้ว", "success");
+      Swal.close(); // ← ปิด popup login ก่อน
+      Swal.fire({
+        title: "สำเร็จ",
+        text: "เข้าสู่ระบบแล้ว",
+        icon: "success",
+        timer: 1500,        // ← ปิดอัตโนมัติใน 1.5 วิ ไม่ต้องกด OK
+        showConfirmButton: false
+      });
     } catch (err) {
       Swal.fire("ผิดพลาด", "ชื่อหรือรหัสไม่ถูกต้อง", "error");
     }
