@@ -207,12 +207,11 @@ table, th, td {
   gap: 8px;
 }
 .date-row input:first-child {
-  flex: 2;   /* ช่องวันที่ — ได้พื้นที่มากกว่า */
+  flex: 2;
   min-width: 0;
 }
-
 .date-row input:last-child {
-  flex: 1;   /* ช่อง interval — เล็กกว่า */
+  flex: 1;
   min-width: 0;
 }
 
