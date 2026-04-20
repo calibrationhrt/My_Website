@@ -204,6 +204,12 @@ table, th, td {
 .date-row {
   justify-content: space-between;
   display: flex;
+  gap: 8px;
+}
+.date-row input {
+  flex: 1;
+  min-width: 0;
+  width: 50%;
 }
 
 /*input page*/
