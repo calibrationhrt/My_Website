@@ -1,18 +1,8 @@
-//Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyCI0J3GHKFl9lmVwOM03stAxwvHHkYFHEM",
-  authDomain: "calibration-bcc66.firebaseapp.com",
-  projectId: "calibration-bcc66",
-  storageBucket: "calibration-bcc66.firebasestorage.app",
-  messagingSenderId: "156162245790",
-  appId: "1:156162245790:web:09d71d12511176410d278f",
-  measurementId: "G-EK23GYH3FL"
-};
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";  
 import { getFirestore, collection, setDoc, onSnapshot, deleteDoc, doc, getDoc, query, where }from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { alertSuccess, alertError, alertWarning, confirmDialog } from "./alert.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { firebaseConfig } from "./config.js";
 
     const app = initializeApp(firebaseConfig); 
     const db = getFirestore(app);
