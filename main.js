@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getFirestore, collection, setDoc, onSnapshot, deleteDoc, doc, getDoc, query, where }from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { alertSuccess, alertError, alertWarning, confirmDialog } from "./alert.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { firebaseConfig } from "./config.js";
+import { firebaseConfig } from "./Config.js";
 
     const app = initializeApp(firebaseConfig); 
     const db = getFirestore(app);
