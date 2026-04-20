@@ -50,8 +50,8 @@ import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPe
       const password = formValues.password;
 
     try {
+      await setPersistence(auth, browserSessionPersistence);
       await signInWithEmailAndPassword(auth, email, password);
-
       sessionStorage.setItem("loginTime", Date.now().toString());
       Swal.fire("สำเร็จ", "เข้าสู่ระบบแล้ว", "success");
     } catch (err) {
