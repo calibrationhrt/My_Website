@@ -25,6 +25,7 @@ import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPe
     let currentUser = null;
     const auth = getAuth(app);
     const EIGHT_HOURS = 8 * 60 * 60 * 1000;
+    let filteredData = [];
 
   //Role
   async function loginAdmin() {
@@ -395,7 +396,7 @@ function renderTable() {
   let overdueCount = 0;
   let html = "";
 
-  const filtered = allData.filter(d => {
+  filteredData = allData.filter(d => {
 
     //กันข้อมูลพัง
     if (!d.lastDate || !d.intervalValue || !d.intervalUnit) return false;
@@ -425,7 +426,7 @@ function renderTable() {
   });
 
   // dashboard
-  filtered.forEach((d) => {
+  filteredData.forEach((d) => {
     const dueDate = calculateDueDate(d.lastDate, d.intervalValue, d.intervalUnit);
     const status = getStatus(dueDate);
 
@@ -436,7 +437,7 @@ function renderTable() {
   // pagination
   const start = (currentPage - 1) * pageSize;
   const end = start + pageSize;
-  const pageData = filtered.slice(start, end);
+  const pageData = filteredData.slice(start, end);
 
   pageData.forEach((d) => {
     const dueDate = calculateDueDate(d.lastDate, d.intervalValue, d.intervalUnit);
@@ -459,11 +460,11 @@ function renderTable() {
 
   table.innerHTML = html;
 
-  document.getElementById("total").innerText = filtered.length;
+  document.getElementById("total").innerText = filteredData.length;
   document.getElementById("nearCount").innerText = nearCount;
   document.getElementById("overdueCount").innerText = overdueCount;
 
-  const maxPage = Math.ceil(filtered.length / pageSize);
+  const maxPage = Math.ceil(filteredData.length / pageSize);
   document.getElementById("pageInfo").innerText =
     `Page ${currentPage} / ${maxPage}`;
 
@@ -568,11 +569,11 @@ async function deleteSelected() {
 
   const ok = await confirmDialog("ต้องการลบข้อมูลใช่ไหม");
   if (!ok) return;
-  alertSuccess("ลบข้อมูลสำเร็จ")
-
+  
   for (let cb of selected) {
     await deleteDoc(doc(db, "devices", cb.value));
   }
+  alertSuccess("ลบข้อมูลสำเร็จ")
 
   deleteMode = false; //ปิดโหมด
   loadData();
@@ -600,7 +601,7 @@ async function deleteSelected() {
   }
   });
   document.getElementById("nextPage").addEventListener("click", () => {
-  const maxPage = Math.ceil(allData.length / pageSize);
+  const maxPage = Math.ceil(filteredData.length / pageSize);
   if (currentPage < maxPage) {
     currentPage++;
     renderTable();
