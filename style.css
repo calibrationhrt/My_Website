@@ -206,10 +206,14 @@ table, th, td {
   display: flex;
   gap: 8px;
 }
-.date-row input {
-  flex: 1;
+.date-row input:first-child {
+  flex: 2;   /* ช่องวันที่ — ได้พื้นที่มากกว่า */
   min-width: 0;
-  width: 50%;
+}
+
+.date-row input:last-child {
+  flex: 1;   /* ช่อง interval — เล็กกว่า */
+  min-width: 0;
 }
 
 /*input page*/
