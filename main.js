@@ -12,7 +12,7 @@ const firebaseConfig = {
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";  
 import { getFirestore, collection, setDoc, onSnapshot, deleteDoc, doc, getDoc, query, where }from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { alertSuccess, alertError, alertWarning, confirmDialog } from "./alert.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     const app = initializeApp(firebaseConfig); 
     const db = getFirestore(app);
@@ -24,6 +24,7 @@ import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from
     let statusFilter = "all";
     let currentUser = null;
     const auth = getAuth(app);
+    const EIGHT_HOURS = 8 * 60 * 60 * 1000;
 
   //Role
   async function loginAdmin() {
@@ -51,6 +52,7 @@ import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from
     try {
       await signInWithEmailAndPassword(auth, email, password);
 
+      sessionStorage.setItem("loginTime", Date.now().toString());
       Swal.fire("สำเร็จ", "เข้าสู่ระบบแล้ว", "success");
     } catch (err) {
       Swal.fire("ผิดพลาด", "ชื่อหรือรหัสไม่ถูกต้อง", "error");
@@ -59,14 +61,24 @@ import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from
 
   function logout() {
     signOut(auth);
+    sessionStorage.removeItem("loginTime");
     Swal.fire("ออกจากระบบสำเร็จ", " ", "success");
-  }
+}
 
   onAuthStateChanged(auth, (user) => {
     const addBtn = document.getElementById("add-btn-additem");
     const delBtn = document.getElementById("deleteSelected");
 
     if (user) {
+      // เช็ค 8 ชั่วโมง
+      const loginTime = sessionStorage.getItem("loginTime");
+      if (loginTime && Date.now() - parseInt(loginTime) > EIGHT_HOURS) {
+      signOut(auth);
+
+      sessionStorage.removeItem("loginTime");
+      Swal.fire("หมดเวลา", "กรุณาเข้าสู่ระบบใหม่", "warning");
+      return;
+    }
       // ✅ login แล้ว
       addBtn.style.display = "inline-block";
       delBtn.style.display = "inline-block";
