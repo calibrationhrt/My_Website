@@ -1,5 +1,5 @@
 body {
-  background: #d1ddee;
+  background: #f5f7fa;
   margin: 0;
   font-family: "Source Sans 3", sans-serif;
   font-optical-sizing: auto;
@@ -63,7 +63,7 @@ body {
 
 .container {
   max-width: 1200px;
-  background: #c8d9f2;
+  background: #eef1f7;
   margin: 10px auto;
   margin-top: 10px;
   padding: 10px;
@@ -75,7 +75,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #c8d9f2;
+  background: #eef1f7;
 }
 
 /* Dashboard */
@@ -89,7 +89,7 @@ body {
   flex: 1;
   padding: 10px;
   border-radius: 12px;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -97,9 +97,9 @@ body {
 .card.active {
   outline: 1px solid black;
 }
-.total { background: #007bff; }
-.near { background: #ffc107; }
-.overdue { background: #dc3545; }
+.total { background: #1a73e8; }
+.near { background: #f59f00; }
+.overdue { background: #e03131; }
 .total:hover {
   transform: scale(1.01);
 }
@@ -151,8 +151,8 @@ td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child
 th {
   font-size: 21px;
   font-weight: bold;
-  background: #749bd2;
-  color: rgb(0, 0, 0);
+  background: #2d5a9e;
+  color: rgb(255, 255, 255);
   padding: 6px;
   border-top: 10px solid #000;
   background-clip: padding-box;
@@ -170,7 +170,7 @@ tbody tr {
   cursor: pointer;
 }
 tr:hover {
-  background-color: #e6f0ff;
+  background-color: #f0f5ff;
 }
 
 .table-card {
