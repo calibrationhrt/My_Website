@@ -419,6 +419,10 @@ table, th, td {
   max-width: 1200px;
   margin: 10px auto;
 }
+#nextPage {
+  margin-right: 20px; /* ปรับตัวเลขได้เลย */
+}
+
 /* Opendetail grid */
 .modal-content {
   background: #e0dfdfe8;
